@@ -10,22 +10,26 @@ function App() {
   const [search, setSearch] = useState('');
 
   const getTopAnime = async () => {
-    const response = await fetch(`https://api.jikan.moe/v3/top/anime/1/bypopularity`);
+    const response = await fetch(`https://api.jikan.moe/v4/top/anime`);
+    
     const data = await response.json();
     // console.log(data);
-    setTopAnime(data.top.slice(0, 10));
+    setTopAnime(data.data.slice(0, 10));
   }
 
   const fetchAnime = async (search) => {
-    const response = await fetch(`https://api.jikan.moe/v3/search/anime?q=${search}&limit=20`);
+    const response = await fetch(`https://api.jikan.moe/v4/anime?q=${search}}`);
     const data = await response.json();
-    setAnimeList(data.results);
+    // console.log(data.data);
+    setAnimeList(data.data);
   }
 
   const handleSearch = (e) => {
     e.preventDefault();
     fetchAnime(search)
-    // console.log(search);
+    if (fetchAnime(search) === [] ){
+      alert("No Anime Found");
+    }    // console.log(search);
   }
   useEffect(() => {
     getTopAnime();
@@ -34,7 +38,7 @@ function App() {
   // console.log(topAnime);
   return (
     <>
-      <div class="background">
+      <div className="background">
         <span></span>
         <span></span>
         <span></span>

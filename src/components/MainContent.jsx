@@ -27,11 +27,13 @@ function MainContent({ handleSearch, search, setSearch, animeList }) {
                 : <>
                     <h2 >Results</h2>
                     <div className="anime-list">
+                        {animeList.length === 0 ? <h2 style={{marginTop : 0 , marginBottom : '30px'}}>No Results Found</h2> : null}
+                        
                         {animeList.map(anime => (
                             // <div className="anime-card" key={anime.mal_id}>
                             //     {anime.title}
                             // </div>
-                            <AnimeCard anime={anime} />
+                            <AnimeCard anime={anime}  key={anime.mal_id}/>
                         ))}
                     </div>
                 </>

@@ -52,10 +52,18 @@ header h1 {
 header h1 strong {
   color: #fff;
 }
-
+.content-wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 40px;
+  width: 80%;
+  margin: 0 auto;
+}
 .content-wrap aside {
   padding-right: 16px;
-  min-height: 50vh;
 }
 
 .content-wrap aside h3 {
@@ -67,7 +75,7 @@ header h1 strong {
 
 .content-wrap aside nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
@@ -78,7 +86,6 @@ header h1 strong {
 .content-wrap aside nav a {
   padding: 8px 16px;
   text-align: left;
-  width: 200px;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -100,8 +107,10 @@ header h1 strong {
 .content-wrap main {
   margin-top: 40px;
   padding: 0px 16px;
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .content-wrap main h2 {
@@ -176,7 +185,7 @@ header h1 strong {
 .content-wrap main .anime-list .anime-card figure img {
   display: block;
   width: 100%;
-  height: 450px;
+  height: 250px;
   object-fit: cover;
   border-radius: 16px;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
@@ -432,3 +441,21 @@ header h1 strong {
   box-shadow: -26vmin 0 4.237958799093036vmin currentColor;
 }
 /*# sourceMappingURL=main.css.map */
+
+@media screen and (max-width:650px) {
+  .content-wrap{
+    width: 100%;
+  }
+  .content-wrap main .anime-list{
+    display: block;
+  }
+  .content-wrap aside nav a{
+    width: 100%;
+    text-align: center;
+  }
+  .content-wrap main .anime-list .anime-card figure img{
+    width: 100%;
+    height : auto;
+    object-fit: cover;
+  }
+}
