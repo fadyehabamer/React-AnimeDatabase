@@ -6,10 +6,10 @@ const jsonResponse = (body, status = 200) => ({
   json: async () => body,
 });
 
-afterEach(() => jest.restoreAllMocks());
+afterEach(() => vi.restoreAllMocks());
 
 test('searchAnime URL-encodes the trimmed query with no stray characters', async () => {
-  global.fetch = jest.fn().mockResolvedValue(jsonResponse({ data: [] }));
+  global.fetch = vi.fn().mockResolvedValue(jsonResponse({ data: [] }));
   await searchAnime('  fullmetal & alchemist ');
   expect(global.fetch).toHaveBeenCalledWith(
     `${JIKAN_BASE_URL}/anime?q=fullmetal%20%26%20alchemist`,
@@ -18,17 +18,17 @@ test('searchAnime URL-encodes the trimmed query with no stray characters', async
 });
 
 test('returns the data array from a successful response', async () => {
-  global.fetch = jest.fn().mockResolvedValue(jsonResponse({ data: [{ mal_id: 1 }] }));
+  global.fetch = vi.fn().mockResolvedValue(jsonResponse({ data: [{ mal_id: 1 }] }));
   await expect(fetchTopAnime()).resolves.toEqual([{ mal_id: 1 }]);
 });
 
 test('returns an empty array when the body has no data field', async () => {
-  global.fetch = jest.fn().mockResolvedValue(jsonResponse({}));
+  global.fetch = vi.fn().mockResolvedValue(jsonResponse({}));
   await expect(searchAnime('x')).resolves.toEqual([]);
 });
 
 test('throws a friendly error on rate limiting (429)', async () => {
-  global.fetch = jest.fn().mockResolvedValue(
+  global.fetch = vi.fn().mockResolvedValue(
     jsonResponse({ status: '429', type: 'RateLimitException' }, 429)
   );
   await expect(searchAnime('naruto')).rejects.toMatchObject({
@@ -38,6 +38,6 @@ test('throws a friendly error on rate limiting (429)', async () => {
 });
 
 test('throws on server errors', async () => {
-  global.fetch = jest.fn().mockResolvedValue(jsonResponse({}, 504));
+  global.fetch = vi.fn().mockResolvedValue(jsonResponse({}, 504));
   await expect(fetchTopAnime()).rejects.toMatchObject({ status: 504 });
 });

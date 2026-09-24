@@ -11,7 +11,7 @@ const anime = (id, title) => ({
 const ok = (data) => Promise.resolve({ ok: true, status: 200, json: async () => ({ data }) });
 const fail = (status) => Promise.resolve({ ok: false, status, json: async () => ({}) });
 
-afterEach(() => jest.restoreAllMocks());
+afterEach(() => vi.restoreAllMocks());
 
 const searchFor = (text) => {
   const input = screen.getByLabelText('Search anime');
@@ -20,13 +20,13 @@ const searchFor = (text) => {
 };
 
 test('shows the top anime in the sidebar', async () => {
-  global.fetch = jest.fn(() => ok([anime(1, 'Frieren'), anime(2, 'Steins;Gate')]));
+  global.fetch = vi.fn(() => ok([anime(1, 'Frieren'), anime(2, 'Steins;Gate')]));
   render(<App />);
   expect(await screen.findByText('1 - Frieren')).toBeInTheDocument();
 });
 
 test('searching renders result cards once', async () => {
-  global.fetch = jest.fn((url) =>
+  global.fetch = vi.fn((url) =>
     url.includes('/top/anime') ? ok([]) : ok([anime(20, 'Naruto')])
   );
   render(<App />);
@@ -39,8 +39,8 @@ test('searching renders result cards once', async () => {
 });
 
 test('shows an error instead of crashing when the API rate-limits', async () => {
-  global.fetch = jest.fn(() => fail(429));
-  jest.spyOn(console, 'error').mockImplementation(() => {});
+  global.fetch = vi.fn(() => fail(429));
+  vi.spyOn(console, 'error').mockImplementation(() => {});
   render(<App />);
 
   searchFor('naruto');
@@ -48,7 +48,7 @@ test('shows an error instead of crashing when the API rate-limits', async () => 
 });
 
 test('shows "No Results Found" only after a search returns nothing', async () => {
-  global.fetch = jest.fn(() => ok([]));
+  global.fetch = vi.fn(() => ok([]));
   render(<App />);
   fireEvent.change(screen.getByLabelText('Search anime'), { target: { value: 'zzz' } });
   expect(screen.queryByText('No Results Found')).not.toBeInTheDocument();
