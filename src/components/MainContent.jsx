@@ -1,7 +1,7 @@
 import React from 'react'
 import AnimeCard from './AnimeCard'
 
-function MainContent({ handleSearch, search, setSearch, animeList }) {
+function MainContent({ handleSearch, search, setSearch, animeList, searchStatus, searchError }) {
     return (
         <main>
             <div className="main-head">
@@ -12,6 +12,7 @@ function MainContent({ handleSearch, search, setSearch, animeList }) {
                 </div>
                 <form className='search-box' onSubmit={handleSearch}>
                     <input type="search"
+                        aria-label="Search anime"
                         placeholder='search for Anime ...'
                         value={search}
                         onChange={e => setSearch(e.target.value)}
@@ -21,18 +22,16 @@ function MainContent({ handleSearch, search, setSearch, animeList }) {
             </div>
 
 
-            {search === ""
-                ?
-                    <h2>No Content Yet</h2>
-                : <>
+            {searchStatus === 'idle' && <h2>No Content Yet</h2>}
+            {searchStatus === 'loading' && <h2 role="status">Searching...</h2>}
+            {searchStatus === 'error' && <h2 role="alert">{searchError}</h2>}
+            {searchStatus === 'done' &&
+                <>
                     <h2 >Results</h2>
                     <div className="anime-list">
                         {animeList.length === 0 ? <h2 style={{marginTop : 0 , marginBottom : '30px'}}>No Results Found</h2> : null}
-                        
+
                         {animeList.map(anime => (
-                            // <div className="anime-card" key={anime.mal_id}>
-                            //     {anime.title}
-                            // </div>
                             <AnimeCard anime={anime}  key={anime.mal_id}/>
                         ))}
                     </div>
