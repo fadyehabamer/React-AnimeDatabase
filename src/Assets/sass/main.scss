@@ -54,9 +54,17 @@ header {
 }
 
 .content-wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin-top: 40px;
+	width: 80%;
+	margin: 0 auto;
+
 	aside {
 		padding-right: 16px;
-		min-height: 50vh;
 
 		h3 {
 			color: #fff;
@@ -67,7 +75,7 @@ header {
 
 		nav {
 			display: flex;
-			justify-content: center;
+			justify-content: flex-start;
 			align-items: center;
 			padding-left: 16px;
 			padding-right: 16px;
@@ -78,13 +86,11 @@ header {
 			a {
 				padding: 8px 16px;
 				text-align: left;
-
-				width: 200px;
 				height: 100px;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				color: rgb(42, 42, 42);
+				color: #2a2a2a;
 				font-size: 16px;
 				margin-bottom: 16px;
 
@@ -96,7 +102,7 @@ header {
 
 				&:hover {
 					background-color: #dfdfdf;
-					color: rgb(97, 97, 97);
+					color: #616161;
 				}
 			}
 		}
@@ -105,8 +111,10 @@ header {
 	main {
 		margin-top: 40px;
 		padding: 0px 16px;
+		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
+		width: 100%;
 
 		h2 {
 			color: #fff;
@@ -138,13 +146,13 @@ header {
 				transition: 0.4s;
 
 				::placeholder {
-					color: rgb(44, 44, 44);
+					color: #2c2c2c;
 				}
 
 				&:focus,
 				&:valid {
 					background-color: #eaeaea;
-					color: rgb(57, 57, 57);
+					color: #393939;
 				}
 			}
 		}
@@ -178,7 +186,7 @@ header {
 					img {
 						display: block;
 						width: 100%;
-						height: 450px;
+						height: 250px;
 						object-fit: cover;
 						border-radius: 16px;
 						box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
@@ -444,4 +452,26 @@ header {
 	animation-delay: -105s;
 	transform-origin: 8vw -12vh;
 	box-shadow: -26vmin 0 4.237958799093036vmin currentColor;
+}
+
+
+@media screen and (max-width: 650px) {
+	.content-wrap {
+		width: 100%;
+
+		main .anime-list {
+			display: block;
+		}
+
+		aside nav a {
+			width: 100%;
+			text-align: center;
+		}
+
+		main .anime-list .anime-card figure img {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+		}
+	}
 }
