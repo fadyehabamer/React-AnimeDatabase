@@ -12,6 +12,7 @@ function MainContent({ handleSearch, search, setSearch, animeList, searchStatus,
                 </div>
                 <form className='search-box' onSubmit={handleSearch}>
                     <input type="search"
+                        aria-label="Search anime"
                         placeholder='search for Anime ...'
                         value={search}
                         onChange={e => setSearch(e.target.value)}
