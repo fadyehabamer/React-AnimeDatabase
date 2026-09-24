@@ -14,17 +14,22 @@ of results.
 - Search For your favourite anime
 
 ### Install
+Requires Node.js 22.13 or newer.
 - npm install
-- npm start
+- npm run dev
 
 ### Scripts
 | Command | What it does |
 | --- | --- |
-| `npm start` | Start the development server on http://localhost:3000 |
-| `npm test` | Run the Jest + Testing Library tests (fetch is mocked, no network) |
+| `npm run dev` / `npm start` | Start the Vite development server on http://localhost:3000 |
+| `npm test` | Run the Vitest + Testing Library tests in watch mode (fetch is mocked, no network); `npm test -- --run` runs them once |
+| `npm run lint` | Lint with ESLint (`eslint.config.js`) |
 | `npm run build` | Production build into `build/` |
+| `npm run preview` | Serve the production build locally |
 
-Styles are written in `src/Assets/sass/main.scss` and compiled to
-`src/Assets/css/main.css` outside the npm build (there is no `sass`
-dependency), so recompile the CSS after editing the SCSS; the app imports
-the `.css` file.
+Styles live in `src/Assets/sass/main.scss`. The app imports the SCSS file
+directly and Vite compiles it with `sass` (a devDependency) in both the dev
+server and `npm run build`; there is no separately generated CSS file.
+
+Built with React 18 and [Vite](https://vite.dev); deployed on Vercel, where
+`vercel.json` selects the Vite preset and the `build/` output folder.
