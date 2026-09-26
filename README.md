@@ -1,4 +1,7 @@
 # React Anime Database
+
+[![CI](https://github.com/fadyehabamer/React-AnimeDatabase/actions/workflows/ci.yml/badge.svg)](https://github.com/fadyehabamer/React-AnimeDatabase/actions/workflows/ci.yml)
+
 > お気に入りのアニメに関する情報を探す
 
 **Live demo:** https://react-anime-databse.vercel.app
